@@ -26,7 +26,9 @@ angular.module('relatedwords.services', [])
 
   var getAll = function(isRefreshing){
     if(collections.length > 0 && !isRefreshing){
-      return new Promise((resolve,reject) => resolve(temp_collections));
+      return new Promise(function(resolve){
+        return resolve(temp_collections);
+      });
     }
     var temp_collections = [];
     var promise = $http.get(ALL_COLLECTIONS_URL).then(function(response){
@@ -75,7 +77,7 @@ angular.module('relatedwords.services', [])
       response.forEach(function(collectionName){
         promises.push(isEmpty(collectionName));
       });
-      return $q.all(promises).then((values) => {
+      return $q.all(promises).then(function(values) {
         values.forEach(function(value){
           if(value){
             collections.push(value);
@@ -106,11 +108,15 @@ angular.module('relatedwords.services', [])
 
   var getAllEx = function(collId,isRefreshing){
     if(exercises[collId] && !isRefreshing){
-      return new Promise((resolve,reject) => resolve(exercises[collId]));
+      return new Promise(function(resolve){
+        return resolve(exercises[collId]);
+      });
     }
     if(!$rootScope.online){
       ionicToast.show(getErrorMsg(),'middle',false,3000);
-      return new Promise((resolve,reject) => resolve([]));
+      return new Promise(function(resolve){
+        return resolve([]);
+      });
     }
     if(!isRefreshing){
       //initiate all sub arrays
@@ -153,11 +159,15 @@ angular.module('relatedwords.services', [])
 
   getSingleEx = function(collId,exId){
     if(words[collId][exId]){
-      return new Promise((resolve,reject) => resolve(words[collId][exId]));
+      return new Promise(function(resolve){
+        return resolve(words[collId][exId]);
+      });
     }
     if(!$rootScope.online){
       ionicToast.show(getErrorMsg(),'middle',false,3000);
-      return new Promise((resolve,reject) => resolve([]));
+      return new Promise(function(resolve){
+        return resolve([]);
+      });
     }
     //initiate
     words[collId][exId] = [];

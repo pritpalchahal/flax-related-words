@@ -337,7 +337,6 @@ angular.module('relatedwords.controllers', [])
     }
   }
   $scope.onDropComplete = function(data,evt,wordId){
-    var dataIndex = $scope.drags.findIndex(x => x.word == data);
     var done = null;
     for(var i=0;i<$scope.words.length;i++){
       var word = $scope.words[i];
@@ -353,8 +352,13 @@ angular.module('relatedwords.controllers', [])
       }
     }
     if(done){
-      var index = $scope.drags.findIndex(x => x.word == done);
-      $scope.drags[index].remaining++;
+      var dragIndex = -1;
+      for(var i=0;i<$scope.drags.length;i++){
+        if($scope.drags[i].word == data){
+          dragIndex = i;
+        }
+      }
+      $scope.drags[dragIndex].remaining++;
     }
     checkAll();
   }
