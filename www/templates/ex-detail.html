@@ -11,7 +11,7 @@
   </ion-nav-buttons>
   <ion-content scroll="false">
 
-        <div class="draggables container-fluid">
+        <div class="draggables">
           <div class="row" ng-repeat="val in drags" ng-switch on="$index % 2">
             <div class="col drags" ng-switch-when="0" ng-drag="!isAllConsumed($index)" ng-drag-data="drags[$index].word" data-allow-transform="true" ng-drag-success="dragSuccess($data,$event,$index)" press-timeout="0" ng-if="drags[$index]">
               <div ng-class="{dragged:isAllConsumed($index)}">{{drags[$index].word}} ({{drags[$index].remaining}})</div>
@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-        <ion-content class="has-header has-subheader has-footer custom-content">
+        <ion-content class="has-header has-footer has-subheader custom-content">
           <div ng-repeat="word in words track by $index" ng-init="wordId = word.id">
             <div class="row">
 
