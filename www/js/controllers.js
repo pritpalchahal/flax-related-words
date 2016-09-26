@@ -352,13 +352,11 @@ angular.module('relatedwords.controllers', [])
       }
     }
     if(done){
-      var dragIndex = -1;
       for(var i=0;i<$scope.drags.length;i++){
-        if($scope.drags[i].word == data){
-          dragIndex = i;
+        if($scope.drags[i].word == done){
+          $scope.drags[i].remaining++;
         }
       }
-      $scope.drags[dragIndex].remaining++;
     }
     checkAll();
   }
