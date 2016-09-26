@@ -119,17 +119,17 @@ angular.module("ngDraggable", [])
                         return;
                     }
 
-                    if(_hasTouch){
-                        cancelPress();
-                        _pressTimer = setTimeout(function(){
-                            cancelPress();
-                            onlongpress(evt);
-                        },pressTimeout);
-                        $document.on(_moveEvents, cancelPress);
-                        $document.on(_releaseEvents, cancelPress);
-                    }else{
+                    // if(_hasTouch){
+                    //     cancelPress();
+                    //     _pressTimer = setTimeout(function(){
+                    //         cancelPress();
+                    //         onlongpress(evt);
+                    //     },pressTimeout);
+                    //     $document.on(_moveEvents, cancelPress);
+                    //     $document.on(_releaseEvents, cancelPress);
+                    // }else{
                         onlongpress(evt);
-                    }
+                    // }
 
                 };
 
