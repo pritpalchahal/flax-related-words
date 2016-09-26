@@ -316,6 +316,7 @@ angular.module('relatedwords.controllers', [])
         correct_words++;
       }
     }
+    SummaryData.updateScore(collId,exId,correct_words);
     if($scope.words.length == correct_words){
       $scope.hide = true;
     }
@@ -337,25 +338,19 @@ angular.module('relatedwords.controllers', [])
     }
   }
   $scope.onDropComplete = function(data,evt,wordId){
-    var done = null;
     for(var i=0;i<$scope.words.length;i++){
       var word = $scope.words[i];
       if(word.id == wordId){
         var value = $scope.words[i].drop;
-        if(value != data){
-          $scope.words[i].drop = data;
-          done = value;
+        $scope.words[i].drop = data;
+        if(value == ""){
+          break;
         }
-        else{
-          $scope.drags[dataIndex].remaining++;
-        }
-      }
-    }
-    if(done){
-      for(var i=0;i<$scope.drags.length;i++){
-        if($scope.drags[i].word == done){
-          $scope.drags[i].remaining++;
-        }
+        var index = $scope.drags.findIndex(function(x){
+          return x.word == value;
+        })
+        $scope.drags[index].remaining++;
+        break;
       }
     }
     checkAll();
@@ -372,15 +367,6 @@ angular.module('relatedwords.controllers', [])
   }
 
   $scope.showSummary = function(){
-    var score = 0;
-    for(var i=0;i<$scope.words.length;i++){
-      var word = $scope.words[i];
-      if(word.isCorrect){
-        score++;
-      }
-    }
-
-    SummaryData.updateScore(collId,exId,score);
     var alertPopup = $ionicPopup.alert({
       scope: $scope,
       title: 'Summary report',
