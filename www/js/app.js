@@ -45,23 +45,23 @@ angular.module('relatedwords', ['ionic', 'relatedwords.controllers', 'relatedwor
     $ionicLoading.hide();
   }
 
+  //ionic.Platform 
+  var isIOS = ionic.Platform.isIOS();
+  var isAndroid = ionic.Platform.isAndroid();
+  var isWindowsPhone = ionic.Platform.isWindowsPhone();//works for windows 8/8.1 phones
+  var isEdge = ionic.Platform.isEdge();//works for windows 10 phones
+
   $ionicPlatform.ready(function() {
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-
-    }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
+
+  //only android and windows have hardware back buttons, return otherwise
+  if(!isAndroid && !isEdge){
+    return;
+  }
 
   $ionicPlatform.registerBackButtonAction(function (event){
     var currentState = $ionicHistory.currentStateName();
@@ -110,9 +110,12 @@ angular.module('relatedwords', ['ionic', 'relatedwords.controllers', 'relatedwor
   //to override default behaviors of specific platforms (android,ios etc)
   //e.g. android align its titles to left by default, so needs to change it here
   //refer to docs http://ionicframework.com/docs/api/provider/$ionicConfigProvider/
-  $ionicConfigProvider.navBar.alignTitle('center');
-  $ionicConfigProvider.backButton.text("");
-  $ionicConfigProvider.backButton.icon('my-back-button');
+  if(!ionic.Platform.isEdge()){
+    $ionicConfigProvider.navBar.alignTitle('center');
+    //change default back button and text with custom image
+    $ionicConfigProvider.backButton.text("");
+    $ionicConfigProvider.backButton.icon('my-back-button');
+  }
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router

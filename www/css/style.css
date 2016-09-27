@@ -1,19 +1,4 @@
 /*
-*=== CUSTOM STYLING OF SLIDE BULLETS (BOTTOM OF PAGE) ===
-*/
-.swiper-pagination-bullet {
-    /*width: 15px;
-    height: 15px;*/
-    color:#000;
-    opacity: 1;
-    background: rgba(0,0,0,0.2);
-}
-.swiper-pagination-bullet-active {
-    color:#fff;
-    background: #3F9200;
-}
-
-/*
 *=== POPOVERS ===
 */
 .pop-image{
@@ -103,10 +88,6 @@ popover-style{
     display: block;
     margin:0 0px;
     position: relative;
-}
-.drags{
-  /*border: 1px solid black;*/
-  margin: 1px;
 }
 
 [ng-drag].drag-over{
@@ -279,13 +260,6 @@ table tr:nth-child(even) {
 }
 .bar.bar-footer{
   border-top: solid 2px #3F9200;
-}
-.slideNo{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 12px;
-  padding-left:5px;
 }
 .my-back-button{
   content: url('../img/back-image.jpg');
