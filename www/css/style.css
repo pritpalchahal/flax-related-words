@@ -271,14 +271,6 @@ table tr:nth-child(even) {
 }
 
 /*
-*-- ion-content in ex-detail --
-*/
-.custom-content.scroll-content {
-  position: absolute;
-  /*top:30px;*/
-}
-
-/*
 *=== OTHER IMPORTANT ===
 */
 .check-button{
