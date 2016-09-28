@@ -114,8 +114,8 @@ angular.module('relatedwords', ['ionic', 'relatedwords.controllers', 'relatedwor
   //to override default behaviors of specific platforms (android,ios etc)
   //e.g. android align its titles to left by default, so needs to change it here
   //refer to docs http://ionicframework.com/docs/api/provider/$ionicConfigProvider/
+  $ionicConfigProvider.navBar.alignTitle('center');
   if(!ionic.Platform.isEdge()){
-    $ionicConfigProvider.navBar.alignTitle('center');
     //change default back button and text with custom image
     $ionicConfigProvider.backButton.text("");
     $ionicConfigProvider.backButton.icon('my-back-button');
