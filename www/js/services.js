@@ -24,12 +24,7 @@ angular.module('relatedwords.services', [])
   var words = [];
   var draggables = [];
 
-  var getAll = function(isRefreshing){
-    if(collections.length > 0 && !isRefreshing){
-      return new Promise(function(resolve){
-        return resolve(temp_collections);
-      });
-    }
+  var getAll = function(){
     var temp_collections = [];
     var promise = $http.get(ALL_COLLECTIONS_URL).then(function(response){
       var x2js = new X2JS();
@@ -70,19 +65,35 @@ angular.module('relatedwords.services', [])
   }
 
   var getAllColls = function(isRefreshing){
-    collections = [];
     promises = [];
 
-    return getAll(isRefreshing).then(function(response){
+    return getAll().then(function(response){
+      if(response.status == 404){
+        return response;
+      }
+      var temp_collections = [];
       response.forEach(function(collectionName){
         promises.push(checkIfEmpty(collectionName));
       });
       return $q.all(promises).then(function(values) {
         values.forEach(function(value){
-          if(value){
-            collections.push(value);
+          if(value && value.status != 404){//ignore erroneous values
+            temp_collections.push(value);
           }
         });
+        //if user if refreshing and due to server error, new collections retrieved
+        //are less than previously retrieved, then simply return previously retrieved
+        if(isRefreshing){
+          if(collections.length <= temp_collections.length){
+            collections = temp_collections;//otherwise return newly retrieved
+          }
+        }
+        else if(temp_collections.length == 0){
+          return {"status":404};//if no collection retrieved, return custom 404 error
+        }
+        else{
+          collections = temp_collections;//if all okay, return retrieved collections
+        }
         return collections;
       });
     });
@@ -103,6 +114,8 @@ angular.module('relatedwords.services', [])
       if(ex.length > 0 || ex.exercise){
         return collection_name;
       }
+    },function(error){
+      return error;
     });
   }
 

@@ -63,7 +63,7 @@ angular.module('relatedwords.controllers', [])
     getData(false);
   }
   else{
-    ionicToast.show("Not online",'middle',false,2500);
+    ionicToast.show(Data.getErrorMsg(),'bottom',false,2500);
   }
 
   $scope.doRefresh = function(){
@@ -71,7 +71,7 @@ angular.module('relatedwords.controllers', [])
       getData(true);
     }
     else{
-      ionicToast.show("Not online",'middle',false,2500);
+      ionicToast.show(Data.getErrorMsg(),'bottom',false,2500);
     }
     $scope.$broadcast('scroll.refreshComplete'); 
   };

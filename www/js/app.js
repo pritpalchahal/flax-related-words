@@ -14,13 +14,13 @@ angular.module('relatedwords', ['ionic', 'relatedwords.controllers', 'relatedwor
   $window.addEventListener("offline", function () {
     $rootScope.$apply(function() {
       $rootScope.online = false;
-      ionicToast.show("offline",'bottom');
+      // ionicToast.show("offline",'bottom');
     });
   }, false);
   $window.addEventListener("online", function () {
     $rootScope.$apply(function() {
       $rootScope.online = true;
-      ionicToast.show("online",'bottom');
+      // ionicToast.show("online",'bottom');
     });
   }, false);
 
