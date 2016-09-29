@@ -52,6 +52,10 @@ angular.module('relatedwords.controllers', [])
         ionicToast.show(Data.get404Msg(),'middle',true);
         return;
       }
+      if(response && response.status == -1){
+        ionicToast.show(Data.getTimeoutMsg(),'middle',true);
+        return;
+      }
       $scope.collections = response;
       return response;
     }).then(function(res){
@@ -145,6 +149,10 @@ angular.module('relatedwords.controllers', [])
     Data.getAllEx(collId,isRefreshing).then(function(response){
       if(response.status && response.status == 404){
         ionicToast.show(Data.get404Msg(),'middle',true);
+        return;
+      }
+      if(response && response.status == -1){
+        ionicToast.show(Data.getTimeoutMsg(),'middle',true);
         return;
       }
       $scope.exercises = response;
@@ -283,6 +291,10 @@ angular.module('relatedwords.controllers', [])
   Data.getSingleEx(collId,exId).then(function(response){
     if(response.status == 404){
       ionicToast.show(Data.get404Msg(),'middle',true);
+      return;
+    }
+    if(response && response.status == -1){
+      ionicToast.show(Data.getTimeoutMsg(),'middle',true);
       return;
     }
     $scope.words = shuffle(response);

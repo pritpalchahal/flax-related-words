@@ -8,6 +8,7 @@ angular.module('relatedwords', ['ionic', 'relatedwords.controllers', 'relatedwor
 
 .run(function($ionicPlatform, $ionicHistory, $stateParams, $filter, $ionicPopup, $window, $rootScope,
   Data, StateData, SummaryData, ionicToast, Ids, $ionicLoading) {
+  $rootScope.timeout = 10000;//global timeout for all http requests in milliseconds
 
   //check network connection
   $rootScope.online = navigator.onLine;
@@ -117,7 +118,7 @@ angular.module('relatedwords', ['ionic', 'relatedwords.controllers', 'relatedwor
   $ionicConfigProvider.navBar.alignTitle('center');
   if(!ionic.Platform.isEdge()){
     //change default back button and text with custom image
-    $ionicConfigProvider.backButton.text("");
+    $ionicConfigProvider.backButton.text('');
     $ionicConfigProvider.backButton.icon('my-back-button');
   }
 
