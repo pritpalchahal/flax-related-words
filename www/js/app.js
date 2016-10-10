@@ -96,7 +96,7 @@ angular.module('relatedwords', ['ionic', 'relatedwords.controllers', 'relatedwor
         SummaryData.updateEndTime(collId,exId,timeNow);
       }
 
-      if(SummaryData.getSummary(collId,exId).score == words.length){
+      if(words && SummaryData.getSummary(collId,exId).score == words.length){
         StateData.updateState(collId,exId,"Complete");
       }
       else{
